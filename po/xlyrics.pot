@@ -1,0 +1,148 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-05-22 23:46+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/conf.c:310
+msgid ""
+"<span foreground=\"red\"><big>Xlyrics</big></span>\n"
+" Xlyrics is a software \n"
+" used for display the lyrics for XMMS\n"
+" and Beep Media Player, etc.\n"
+"\n"
+" Author: xiaosuo (xiaosuo1@eyou.com)\n"
+" Homepage: gentux.blogchina.com"
+msgstr ""
+
+#: ../src/conf.c:348
+msgid "Change background color"
+msgstr ""
+
+#: ../src/conf.c:350
+msgid "Change activated font color"
+msgstr ""
+
+#: ../src/conf.c:352
+msgid "Change unactivated font color"
+msgstr ""
+
+#: ../src/conf.c:397
+msgid "Change the font"
+msgstr ""
+
+#: ../src/conf.c:472
+msgid "Please select a dir."
+msgstr ""
+
+#: ../src/conf.c:549
+msgid "Background Color:"
+msgstr ""
+
+#: ../src/conf.c:562
+msgid "Activated Font Color:"
+msgstr ""
+
+#: ../src/conf.c:575
+msgid "Unactivated Font Color:"
+msgstr ""
+
+#: ../src/conf.c:588
+msgid "Main Font:"
+msgstr ""
+
+#: ../src/conf.c:601
+msgid "Opacity:"
+msgstr ""
+
+#: ../src/conf.c:629
+msgid "Set plugin file(need restart):"
+msgstr ""
+
+#: ../src/conf.c:636
+msgid "Set lyrics directory:"
+msgstr ""
+
+#: ../src/conf.c:653
+msgid "Look for lyrics in mp3 directory"
+msgstr ""
+
+#: ../src/conf.c:660
+msgid "hide widow if lyrics was't found"
+msgstr ""
+
+#: ../src/conf.c:701 ../src/conf.c:702
+msgid "Interface"
+msgstr ""
+
+#: ../src/conf.c:708 ../src/conf.c:709
+msgid "Common"
+msgstr ""
+
+#: ../src/conf.c:715 ../src/conf.c:716 ../src/xlyrics.c:287
+msgid "About"
+msgstr ""
+
+#: ../src/lyrics_download.c:147
+msgid "Lyrics download manager"
+msgstr ""
+
+#: ../src/lyrics_download.c:160
+msgid "Search"
+msgstr ""
+
+#: ../src/lyrics_download.c:179
+msgid "Double click the item to download the lyrics"
+msgstr ""
+
+#: ../src/lyrics_download.c:180
+msgid ""
+"Choose the lyrics you want to download, and\t\t\tdouble click on the item, "
+"the lyrics will be\t\t\tdownloaded automaticly"
+msgstr ""
+
+#: ../src/xlyrics.c:242
+msgid "Keep above "
+msgstr ""
+
+#: ../src/xlyrics.c:249
+msgid "No border"
+msgstr ""
+
+#: ../src/xlyrics.c:256
+msgid "Auto adjust width"
+msgstr ""
+
+#: ../src/xlyrics.c:266
+msgid "Download this lyrics"
+msgstr ""
+
+#: ../src/xlyrics.c:274
+msgid "Interface config"
+msgstr ""
+
+#: ../src/xlyrics.c:279
+msgid "Generally config"
+msgstr ""
+
+#: ../src/xlyrics.c:292
+msgid "Exit"
+msgstr ""
+
+#: ../src/xlyrics.c:556
+msgid ""
+"You will close the XLyrics \n"
+" Are you sure?"
+msgstr ""

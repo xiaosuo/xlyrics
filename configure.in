@@ -1,0 +1,126 @@
+dnl the xlyrics's configure.in written by xiaosuo
+AC_INIT(src/xlyrics.c)
+AM_INIT_AUTOMAKE(xlyrics, 0.0.3)
+AC_CONFIG_HEADERS([config.h])
+AM_MAINTAINER_MODE
+dnl check the base compiler
+AC_PROG_CC
+AC_PROG_CXX
+AC_ISC_POSIX
+AC_HEADER_STDC
+AC_C_INLINE
+CFLAGS=""
+CXXFLAGS=""
+dnl check libtool
+AM_PROG_LIBTOOL
+dnl check install program
+AC_PROG_INSTALL
+dnl check gettext
+AM_GNU_GETTEXT
+ALL_LINGUAS="zh_CN"
+GETTEXT_PACKAGE=xlyrics
+AC_SUBST(GETTEXT_PACKAGE)
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [xlyrics])
+if test "x${prefix}" = "xNONE"; then
+	AC_DEFINE_UNQUOTED(PACKAGE_LOCALE_DIR, "${ac_default_prefix}/${DATADIRNAME}/locale", [locale dir])
+else
+	AC_DEFINE_UNQUOTED(PACKAGE_LOCALE_DIR, "${prefix}/${DATADIRNAME}/locale", [locale dir])
+fi
+dnl Set PACKAGE SOURCE DIR in config.h.
+packagesrcdir=`cd $srcdir && pwd`
+
+dnl Set PACKAGE PREFIX
+if test "x${prefix}" = "xNONE"; then
+  packageprefix=${ac_default_prefix}
+else
+  packageprefix=${prefix}
+fi
+
+dnl Set PACKAGE DATA & DOC DIR
+packagedatadir=share
+packagedocdir=doc/${PACKAGE}
+
+dnl Set PACKAGE DIRS in config.h.
+packagepixmapsdir=${packagedatadir}/pixmaps
+packagehelpdir=${packagedatadir}/help
+packagemenudir=${packagedatadir}/${PACKAGE}
+packagelibdir=lib/${PACKAGE}
+
+dnl Subst PACKAGE_DATA_DIR.
+NO_PREFIX_PACKAGE_DATA_DIR="${packagedatadir}"
+AC_SUBST(NO_PREFIX_PACKAGE_DATA_DIR)
+PACKAGE_DATA_DIR="${packageprefix}/${packagedatadir}"
+AC_SUBST(PACKAGE_DATA_DIR)
+
+dnl Subst PACKAGE_DOC_DIR.
+NO_PREFIX_PACKAGE_DOC_DIR="${packagedocdir}"
+AC_SUBST(NO_PREFIX_PACKAGE_DOC_DIR)
+PACKAGE_DOC_DIR="${packageprefix}/${packagedocdir}"
+AC_SUBST(PACKAGE_DOC_DIR)
+
+dnl Subst PACKAGE_PIXMAPS_DIR.
+NO_PREFIX_PACKAGE_PIXMAPS_DIR="${packagepixmapsdir}"
+AC_SUBST(NO_PREFIX_PACKAGE_PIXMAPS_DIR)
+PACKAGE_PIXMAPS_DIR="${packageprefix}/${packagepixmapsdir}"
+AC_SUBST(PACKAGE_PIXMAPS_DIR)
+
+dnl Subst PACKAGE_HELP_DIR.
+NO_PREFIX_PACKAGE_HELP_DIR="${packagehelpdir}"
+AC_SUBST(NO_PREFIX_PACKAGE_HELP_DIR)
+PACKAGE_HELP_DIR="${packageprefix}/${packagehelpdir}"
+AC_SUBST(PACKAGE_HELP_DIR)
+
+dnl Subst PACKAGE_MENU_DIR.
+NO_PREFIX_PACKAGE_MENU_DIR="${packagemenudir}"
+AC_SUBST(NO_PREFIX_PACKAGE_MENU_DIR)
+PACKAGE_MENU_DIR="${packageprefix}/${packagemenudir}"
+AC_SUBST(PACKAGE_MENU_DIR)
+
+dnl Subst PACKAGE_LIB_DIR
+NO_PREFIX_PACKAGE_LIB_DIR="${packagelibdir}"
+AC_SUBST(NO_PREFIX_PACKAGE_LIB_DIR)
+PACKAGE_LIB_DIR="${packageprefix}/${packagelibdir}"
+AC_SUBST(PACKAGE_LIB_DIR)
+
+AC_DEFINE_UNQUOTED(PACKAGE_DATA_DIR, "${packageprefix}/${packagedatadir}", [data dir])
+AC_DEFINE_UNQUOTED(PACKAGE_DOC_DIR, "${packageprefix}/${packagedocdir}", [doc dir])
+AC_DEFINE_UNQUOTED(PACKAGE_PIXMAPS_DIR, "${packageprefix}/${packagepixmapsdir}", [pixmaps dir])
+AC_DEFINE_UNQUOTED(PACKAGE_HELP_DIR, "${packageprefix}/${packagehelpdir}", [help dir])
+AC_DEFINE_UNQUOTED(PACKAGE_MENU_DIR, "${packageprefix}/${packagemenudir}", [menu dir])
+AC_DEFINE_UNQUOTED(PACKAGE_SOURCE_DIR, "${packagesrcdir}", [source dir])
+AC_DEFINE_UNQUOTED(PACKAGE_LIB_DIR, "${packageprefix}/${packagelibdir}", [lib dir]) 
+dnl check gtk+ glib gdk
+PKG_CHECK_MODULES(GTK2, gtk+-2.0 >= 2.4.0 gdk-2.0 >= 2.4.0  glib-2.0 >= 2.4.0, ,exit)
+AC_SUBST(GTK2_CFLAGS)
+AC_SUBST(GTK2_LIBS)
+dnl check dbus 
+PKG_CHECK_MODULES(DBUS, dbus-glib-1, ,exit)
+AC_SUBST(DBUS_LIBS)
+AC_SUBST(DBUS_CFLAGS)
+AC_SUBST(DBUS_GENERAL_PLUGIN_DIR)
+dnl check audacious
+PKG_CHECK_MODULES(AUDACIOUS, audacious, AUDACIOUS_GENERAL_PLUGIN_DIR=`pkg-config --variable general_plugin_dir audacious`, echo "*** audacious media player not found - the plugin not incluede***")
+AC_SUBST(AUDACIOUS_LIBS)
+AC_SUBST(AUDACIOUS_CFLAGS)
+AC_SUBST(AUDACIOUS_GENERAL_PLUGIN_DIR)
+AM_CONDITIONAL(HAVE_AUDACIOUS, test X$AUDACIOUS_GENERAL_PLUGIN_DIR != X)
+dnl check amarok
+AM_CONDITIONAL(HAVE_AMAROK, which amarok >/dev/null 2>&1)
+KDE_PREFIX=`kde-config --prefix`
+QT_LDFLAGS=-L${QTDIR}/lib
+QT_CXXFLAGS=-I${QTDIR}/include
+KDE_LDFLAGS=-L${KDE_PREFIX}/lib
+KDE_CXXFLAGS=-I${KDE_PREFIX}/include
+AC_SUBST(KDE_LDFLAGS)
+AC_SUBST(KDE_CXXFLAGS)
+AC_SUBST(QT_LDFLAGS)
+AC_SUBST(QT_CXXFLAGS)
+dnl AMDEP variable
+AM_CONDITIONAL(AMDEP, : )
+dnl ouput makefiles
+AC_OUTPUT(Makefile \
+		src/Makefile \
+		src/plugins/Makefile \
+		src/audaciousplugin/Makefile \
+		intl/Makefile \
+		po/Makefile.in )

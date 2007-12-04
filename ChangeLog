@@ -1,0 +1,50 @@
+________________________________________
+xlyrics-0.4.7 Zhang Le <r0bertz@gentoo.org>
+1. make it work with audacious-1.4.2 (dbus)
+2. removed bmp and xmms support
+3. use AC_DEFINE_UNQUOTED with its third argument instead of template file acconfig.h
+________________________________________
+xlyrics-0.4.6 Zhang Le <r0bertz@gentoo.org>
+1. unknown
+________________________________________
+xlyrics-0.4.5
+1.fallback to the lyrics database on the website www.hjqing.com
+2.Add support for amarok
+3.FixBug: id3's segment fault -- memory leak
+________________________________________
+xlyrics-0.4.3
+1.use the lyrics database on the website www.fei5.com
+________________________________________
+xlyrics-0.4.2
+1.加入了itag3的支持。感谢zhllg@linuxsir.org!
+2.修正了一些内存泄漏和小bug。
+3.重新跟踪到新的歌词服务器。
+----------------------------------------
+xlyrics-0.4
+1.版本号的命名因为错误改变了，不过似乎这个版本号更好。
+2.彻底解决了拖动窗口会抖动的问题。
+3.用perl脚本的形式实现了歌词的自动下载
+4.修改了configure过程中beep-media-player的General
+Plugin找不到的问题(Gentoo相关)
+5.换歌曲时，歌词重定到开始
+6.适合窗口宽度的动作
+7.更强的歌词适应能力
+8.背景透明的实现
+-----------------------------------------
+xlyrics-0.0.2
+1.去掉了窗口框架。
+2.左键拖动窗口，拖动右下角可以改变窗口大小。
+3.自动调整窗口宽度。
+4.如果歌词文件没有找到在cache中去掉。
+5.修正了右键菜单不能正确定位note页的bug。
+6.可以选择总是将窗口放在最上边。
+------------------------------------------
+xlyrics-0.0.1
+1.在指定目录下查找并显示歌词。
+2.用户可以指定背景,活跃歌词颜色和不活跃歌词颜色，歌词字体
+3.可以指定是否需要搜索mp3的路径
+4.第一次从目录搜索，以后从cache读取，提高速度。
+5.能保存上次退出的窗口大小和位置。
+6.支持xmms和beep media player(但是由于xmms和beep的关系不能两个同时执行)。
+7.支持通过双击歌词来指定播放位置。
+----------------------------------------
