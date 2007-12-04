@@ -12,22 +12,6 @@ static int child;
 void start_plugin(void);
 void cleanup(void);
 
-GeneralPlugin gp = {
-	NULL,
-	NULL,
-	-1,
-	"Xlyrics Plugin",
-	start_plugin,
-	NULL,
-	NULL,
-	cleanup
-};
-
-GeneralPlugin * get_gplugin_info(void)
-{
-	return &gp;
-}
-
 void start_plugin(void)
 {
 	child = fork();
