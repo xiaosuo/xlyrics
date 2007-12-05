@@ -22,8 +22,6 @@
 #include<locale.h>
 #include<X11/Xlib.h>
 #include<X11/Xatom.h>
-#include<audacious/audctrl.h>  /* provided by audacious */
-#include<audacious/dbus.h>  /* provided by audacious */
 
 #define OPAQUE	0xffffffff
 
@@ -72,13 +70,13 @@ gboolean is_lyrics_loaded = FALSE; /* the lyrics file loaded or not*/
 
 typedef int   (*is_players_on) (void);
 typedef int   (*launch_players) (void);
-typedef char* (*get_players_song) (DBusGProxy *session);
-typedef int   (*get_players_time) (DBusGProxy *session);
-typedef int   (*set_players_time) (DBusGProxy *session, int time);
+typedef char* (*get_players_song) (int session);
+typedef int   (*get_players_time) (int session);
+typedef int   (*set_players_time) (int session, int time);
 
 GModule *module; /*the plugin module*/
 int timer; /*the timer*/
-DBusGProxy *session; /*the current player session*/
+int session; /*the current player session*/
 int is_downloading = 0; /*downloading lyrics*/
 is_players_on is_player_on; /*if player on or not*/
 launch_players launch_player; /*launch a new player session*/
@@ -501,7 +499,6 @@ void set_line_time(GtkTreeView *treeview,
 	GtkTreeIter iter;
 	gint line_number;
 	struct LyricsLine *line = NULL;
-	DBusGProxy *session;
 
 	if(song && gtk_tree_model_get_iter(GTK_TREE_MODEL(list_store), &iter, path))
 	{
@@ -509,7 +506,7 @@ void set_line_time(GtkTreeView *treeview,
 		for(line = song->head; line != NULL; line = line->next)
 			if(line->line_number == line_number)
 				break;
-		if((session = is_player_on()) != NULL && line != NULL)
+		if((session = is_player_on()) && line != NULL)
 			set_player_time(session, line->line_time);
 	}
 }
@@ -720,7 +717,7 @@ gboolean timeout(gpointer data)
 		redraw_list();
 	}
 
-	if((session = is_player_on()) == NULL )
+	if((session = is_player_on()))
 	{
 		quit(window, "nop");
 		return FALSE;
@@ -826,7 +823,7 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 
-	if((session = is_player_on()) == NULL ) {
+	if((session = is_player_on())) {
 		session = launch_player();
 	}
 

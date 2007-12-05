@@ -462,7 +462,7 @@ void set_dir(GtkWidget *widget, gpointer data)
 	if(data != NULL && file != NULL){
 		utf8 = locale2utf8(file);
 		gtk_entry_set_text(GTK_ENTRY(data), utf8);
-		g_free(utf8);
+		g_free((void*)utf8);
 	}
 	gtk_widget_destroy(file_win);
 }
