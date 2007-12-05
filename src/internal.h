@@ -35,6 +35,8 @@
 
 /* check the code and convert locale code to utf8 */
 extern gchar* locale2utf8(const gchar* data);
+extern gchar* gb23122utf8(const gchar* data);
+extern gchar* locale2gb2312(const gchar *data);
 extern gchar* utf82locale(const gchar* data);
 
 #endif

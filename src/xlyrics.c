@@ -12,16 +12,14 @@
  *  GNU General Public License for more details.
  */
 
-#include<stdlib.h>
-#include<string.h>
 #include<gtk/gtk.h>
 #include<gdk/gdk.h>
 #include<gdk/gdkx.h>
 #include<glib.h>
 #include<gmodule.h>
 #include<locale.h>
-#include<X11/Xlib.h>
-#include<X11/Xatom.h>
+#include <X11/Xlib.h>
+#include <X11/Xatom.h>
 
 #define OPAQUE	0xffffffff
 
@@ -657,9 +655,13 @@ void load_lyrics_file(char *playfile_full)
 				ptr = strrchr(tmp, '.');
 				if(ptr) *ptr = '\0';
 				snprintf(buf, 1024, "%s/%s.lrc", lyrics_dir, tmp);
-				if(lyrics_download(tmp, buf) == 0)
-					is_downloading = 1;
+				ptr = locale2gb2312(tmp);
 				g_free(tmp);
+				if(ptr){
+					if(lyrics_download(ptr, buf) == 0)
+						is_downloading = 1;
+					g_free(ptr);
+				}
 			}else if(is_downloading)
 				is_downloading =  0;
 #endif
@@ -823,10 +825,8 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 
-	if((session = is_player_on()) < 0) {
+	if((session = is_player_on()) < 0)
 		session = launch_player();
-	}
-
 
 	gtk_set_locale();
 

@@ -12,7 +12,6 @@
  *  GNU General Public License for more details.
  */
 #include <glib.h>
-#include <string.h>
 #include "internal.h"
 /* check the code and convert locale code to utf8 */
 gchar* locale2utf8(const gchar* data)
@@ -24,6 +23,25 @@ gchar* locale2utf8(const gchar* data)
 	return g_locale_to_utf8(data, -1, NULL, NULL, NULL);
 }
 
+gchar* gb23122utf8(const gchar *data)
+{
+	if(data == NULL)
+		return NULL;
+	if(g_utf8_validate(data, -1, NULL) == TRUE)
+		return (gchar*)strdup(data);
+	return g_convert(data, -1, "utf8", "gb2312", NULL, NULL, NULL);
+}
+
+gchar* locale2gb2312(const gchar *data)
+{
+	const gchar *charset;
+
+	if(data == NULL)
+		return NULL;
+	g_get_charset(&charset);
+	return g_convert(data, -1, "gb2312", charset, NULL, NULL, NULL);
+}
+	
 /* check the code and convert utf8 to locale code */
 gchar * utf82locale(const gchar* data)
 {

@@ -11,16 +11,14 @@
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  */
-#include<unistd.h>
-#include<string.h>
-#include<gtk/gtk.h>
-#include<stdlib.h>
-#include<stdio.h>
-#include<sys/types.h>
-#include<sys/wait.h>
-#include<signal.h>
-#include"lyrics_download.h"
-#include"internal.h"
+#include <gtk/gtk.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <signal.h>
+#include "lyrics_download.h"
+#include "internal.h"
 
 static GtkListStore *store; /* the lyrics files list store */
 static GtkWidget *tree; /* the tree view of the list store */
@@ -88,7 +86,8 @@ void add_lyrics_info(const gchar *resrc)
 			gtk_list_store_append(GTK_LIST_STORE(store), &iter);
 			if((ptr=strrchr(buf, '\r')) != NULL) *ptr = '\0';
 			if((ptr=strrchr(buf, '\n')) != NULL) *ptr = '\0';
-			utf8 = locale2utf8(buf);
+			utf8 = gb23122utf8(buf);
+			if(!utf8) continue;
 			if((ptr=strrchr(utf8, '@')) != NULL) *ptr = '\0';
 			gtk_list_store_set(GTK_LIST_STORE(store), &iter,
 					0, utf8,
