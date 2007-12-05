@@ -11,6 +11,8 @@
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  */
+#include <string.h>
+#include <unistd.h>
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include <stdio.h>

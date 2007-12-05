@@ -12,23 +12,25 @@
  *  GNU General Public License for more details.
  */
 
-#include<gtk/gtk.h>
-#include<gdk/gdk.h>
-#include<gdk/gdkx.h>
-#include<glib.h>
-#include<gmodule.h>
-#include<locale.h>
+#include <string.h>
+#include <stdlib.h>
+#include <gtk/gtk.h>
+#include <gdk/gdk.h>
+#include <gdk/gdkx.h>
+#include <glib.h>
+#include <gmodule.h>
+#include <locale.h>
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 
 #define OPAQUE	0xffffffff
 
-#include"xlyrics.h"
-#include"lyrics.h"
-#include"find.h"
-#include"conf.h"
-#include"lyrics_download.h"
-#include"internal.h"
+#include "xlyrics.h"
+#include "lyrics.h"
+#include "find.h"
+#include "conf.h"
+#include "lyrics_download.h"
+#include "internal.h"
 
 struct Song *song = NULL; /*current song name*/
 struct LyricsLine *lyrics_line = NULL; /*currnet line of lyrics*/

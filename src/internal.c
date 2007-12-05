@@ -11,6 +11,7 @@
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  */
+#include <string.h>
 #include <glib.h>
 #include "internal.h"
 /* check the code and convert locale code to utf8 */
