@@ -506,7 +506,7 @@ void set_line_time(GtkTreeView *treeview,
 		for(line = song->head; line != NULL; line = line->next)
 			if(line->line_number == line_number)
 				break;
-		if((session = is_player_on()) && line != NULL)
+		if((session = is_player_on()) >= 0 && line != NULL)
 			set_player_time(session, line->line_time);
 	}
 }
@@ -717,7 +717,7 @@ gboolean timeout(gpointer data)
 		redraw_list();
 	}
 
-	if((session = is_player_on()))
+	if((session = is_player_on()) < 0)
 	{
 		quit(window, "nop");
 		return FALSE;
@@ -823,7 +823,7 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 
-	if((session = is_player_on())) {
+	if((session = is_player_on()) < 0) {
 		session = launch_player();
 	}
 
