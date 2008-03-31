@@ -21,7 +21,23 @@ gchar* locale2utf8(const gchar* data)
 		return NULL;
 	if(g_utf8_validate(data, -1, NULL) == TRUE)
 		return (gchar*)strdup(data);
-	return g_locale_to_utf8(data, -1, NULL, NULL, NULL);
+
+	/* thanks to cyril <cyril42e@gmail.com>*/
+	gchar *res = g_locale_to_utf8(data, -1, NULL, NULL, NULL);
+	return res ? res : (gchar*)strdup(data);  
+}
+	
+/* check the code and convert utf8 to locale code */
+gchar * utf82locale(const gchar* data)
+{
+	if(data == NULL)
+		return NULL;
+	if(g_utf8_validate(data, -1, NULL) == FALSE)
+		return (gchar*)strdup(data);
+
+	/* thanks to cyril <cyril42e@gmail.com>*/
+	gchar *res = g_locale_to_utf8(data, -1, NULL, NULL, NULL);
+	return res ? res : (gchar*)strdup(data);  
 }
 
 gchar* gb23122utf8(const gchar *data)
@@ -41,14 +57,4 @@ gchar* locale2gb2312(const gchar *data)
 		return NULL;
 	g_get_charset(&charset);
 	return g_convert(data, -1, "gb2312", charset, NULL, NULL, NULL);
-}
-	
-/* check the code and convert utf8 to locale code */
-gchar * utf82locale(const gchar* data)
-{
-	if(data == NULL)
-		return NULL;
-	if(g_utf8_validate(data, -1, NULL) == FALSE)
-		return (gchar*)strdup(data);
-	return g_locale_from_utf8(data, -1, NULL, NULL, NULL);
 }
