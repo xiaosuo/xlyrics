@@ -608,6 +608,13 @@ void load_lyrics_file(char *playfile_full)
 	char *lyricsfile = NULL;
 	char *filename_begin;
 
+	/* the 'get_player_song' API function of Audacious now returns a
+	 * string in the format of "file://..."
+	 * thanks to cyril <cyril42e@gmail.com>
+	 */
+	if (strncmp(playfile_full, "file://", 7) == 0) 
+		playfile_full += 7;                                                        
+
 	strcpy(last_song, get_player_song(session));
 	gtk_list_store_clear(list_store);
 	lyrics_cleanup(song);
