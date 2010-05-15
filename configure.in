@@ -99,7 +99,7 @@ AC_SUBST(DBUS_LIBS)
 AC_SUBST(DBUS_CFLAGS)
 AC_SUBST(DBUS_GENERAL_PLUGIN_DIR)
 dnl check audacious
-PKG_CHECK_MODULES(AUDACIOUS, audacious, AUDACIOUS_GENERAL_PLUGIN_DIR=`pkg-config --variable general_plugin_dir audacious`, echo "*** audacious media player not found - the plugin not incluede***")
+PKG_CHECK_MODULES(AUDACIOUS, audacious audclient, AUDACIOUS_GENERAL_PLUGIN_DIR=`pkg-config --variable general_plugin_dir audacious`, echo "*** audacious media player not found - the plugin not incluede***")
 AC_SUBST(AUDACIOUS_LIBS)
 AC_SUBST(AUDACIOUS_CFLAGS)
 AC_SUBST(AUDACIOUS_GENERAL_PLUGIN_DIR)
