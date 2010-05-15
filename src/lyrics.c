@@ -70,7 +70,7 @@ get_line_body(char *line)
 }
 
 struct LyricsLine *  /*get the lyrics line from the buffer ,the buffer begin with "[" end with '\0'*/
-get_lyrics_line(char *buffer, struct Song *song)
+get_lyrics_line(char *buffer, struct Song *song, char synced_lyrics)
 {
     struct LyricsLine *newll = NULL;
     int current_pos = 0;
@@ -78,13 +78,15 @@ get_lyrics_line(char *buffer, struct Song *song)
 
 	while(1)
 	{
-		if (buffer[current_pos] != '[') /* not the begin */
+		if (synced_lyrics && buffer[current_pos] != '[') /* not the begin */
 	   		return NULL;
 
 		newll = calloc(1, sizeof(struct LyricsLine));
 		if (!newll)
 		    return (NULL);
 	
+		if (synced_lyrics)
+		{
 		sscanf(&buffer[current_pos], "[%f:%f]", &minutes, &seconds);
 		newll->line_time = minutes * 60 + seconds;
 		newll->buffer = strdup(get_line_body(buffer));
@@ -93,6 +95,13 @@ get_lyrics_line(char *buffer, struct Song *song)
 		while (buffer[current_pos] != ']')
 			current_pos ++;
 		current_pos ++;
+		} else
+		{
+			newll->line_time = 0;
+			newll->buffer = strdup(buffer);
+			addline(song, newll);
+			break;
+		}
 	}
 
     return (newll);
@@ -107,6 +116,7 @@ read_lyrics_file(char *filename)
     char buffer[255];
     char *x;
 	int line_n=0;
+	char synced_lyrics = strcmp(strrchr(filename,'.'), ".txt");
 
     file = fopen(filename, "r");
     if (!file)
@@ -123,9 +133,9 @@ read_lyrics_file(char *filename)
 
 		for(x = buffer; isblank(*x); x++) ;
 	
-		if ((x[0] == '[') && (isdigit(x[1])))
+		if (!synced_lyrics || ((x[0] == '[') && (isdigit(x[1]))))
 		{
-		    get_lyrics_line(x, song);
+		    get_lyrics_line(x, song, synced_lyrics);
 		}
 		else if ((x[0] == '[') && !(isdigit(x[1])))
 		{
