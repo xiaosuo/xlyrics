@@ -2,6 +2,7 @@ dnl the xlyrics's configure.in written by xiaosuo
 AC_INIT(src/xlyrics.c)
 AM_INIT_AUTOMAKE(xlyrics, 0.0.3)
 AC_CONFIG_HEADERS([config.h])
+AC_CONFIG_MACRO_DIR([m4])
 AM_MAINTAINER_MODE
 dnl check the base compiler
 AC_PROG_CC

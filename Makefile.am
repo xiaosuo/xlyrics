@@ -1,4 +1,4 @@
-
+ACLOCAL_AMFLAGS = "-I m4"
 SUBDIRS = intl po src 
 
 xlyricsdocdir = ${prefix}/doc/xlyrics
